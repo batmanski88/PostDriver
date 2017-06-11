@@ -9,11 +9,13 @@ namespace PostDriver.Api.Services
 {
     public class UserService : IUserService
     {
-         private readonly IUserRepo _userRepo;
+        private readonly IUserRepo _userRepo;
+        private readonly IEncrypter _encrypter;
 
-        public UserService(IUserRepo userRepo)
+        public UserService(IUserRepo userRepo, IEncrypter encrypter)
         {
             _userRepo = userRepo;
+            _encrypter = encrypter;
         }
 
         public async Task<UserViewModel> GetUserByIdAsync(Guid UserId)
@@ -38,6 +40,13 @@ namespace PostDriver.Api.Services
             {
                 throw new Exception("Użytkownik nie istnieje!");
             }
+            var salt = _encrypter.GetSalt(model.Password);
+            var hash = _encrypter.GetHash(model.Password, salt);
+
+            if(model.Password == hash)
+            {
+                return;
+            }
         }
 
         public async Task RegisterAsync(RegisterViewModel model)
@@ -48,11 +57,11 @@ namespace PostDriver.Api.Services
             {
                 throw new Exception($"Użytkownik o podanym adresie email: '{model.Email}' już istnieje!");
             }
-            else
-            {
-                user = new User(model.Email, model.Password, model.ConfirmPassword, model.Username, model.Role);
-            }
             
+            var salt = _encrypter.GetSalt(model.Password);
+            var hash = _encrypter.GetHash(model.Password, salt);
+
+            user = new User(model.Username, model.Email, hash, salt, model.Role);
             await _userRepo.AddUserAsync(user); 
     }
 }
