@@ -3,8 +3,19 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-         <environment names="development">
-        <link rel="stylesheet" href="" />>
-    </environment>
+            <environment names="Development">
+                <link rel="stylesheet" href="../../wwwroot/lib/bootstrap/dist/css/bootstrap.css" />
+            </environment>
     </head>
+    <body>
+        <div class="container">
+            @RenderBody()
+        </div>
+        <environment names="Development">
+            <script src="../../wwwroot/lib/angularjs/angular.js"></script>
+            <script src="../../wwwroot/lib/bootstrap/dist/js/bootstrap.js"></script>
+        </environment>
+
+        @RenderSection("Scripts", required: false)
+    </body>
 </html>

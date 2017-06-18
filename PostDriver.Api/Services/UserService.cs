@@ -41,7 +41,7 @@ namespace PostDriver.Api.Services
                 throw new Exception("Użytkownik nie istnieje!");
             }
             var salt = _encrypter.GetSalt(model.Password);
-            var hash = _encrypter.GetHash(model.Password, salt);
+            var hash = _encrypter.GetHash(model.Password, user.Salt);
 
             if(model.Password == hash)
             {

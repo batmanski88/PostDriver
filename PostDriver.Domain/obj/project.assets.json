@@ -5009,16 +5009,16 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\marcin.lapinski\\Documents\\Project\\PostDriver\\PostDriver.Domain\\PostDriver.Domain.csproj",
+      "projectUniqueName": "c:\\Users\\marcin.lapinski\\Documents\\Project\\PostDriver\\PostDriver.Domain\\PostDriver.Domain.csproj",
       "projectName": "PostDriver.Domain",
-      "projectPath": "C:\\Users\\marcin.lapinski\\Documents\\Project\\PostDriver\\PostDriver.Domain\\PostDriver.Domain.csproj",
-      "outputPath": "C:\\Users\\marcin.lapinski\\Documents\\Project\\PostDriver\\PostDriver.Domain\\obj\\",
+      "projectPath": "c:\\Users\\marcin.lapinski\\Documents\\Project\\PostDriver\\PostDriver.Domain\\PostDriver.Domain.csproj",
+      "outputPath": "c:\\Users\\marcin.lapinski\\Documents\\Project\\PostDriver\\PostDriver.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netstandard1.4"
       ],
       "files": {
-        "lib/netstandard1.4/PostDriver.Domain.dll": "C:\\Users\\marcin.lapinski\\Documents\\Project\\PostDriver\\PostDriver.Domain\\bin\\placeholder\\netstandard1.4\\PostDriver.Domain.dll"
+        "lib/netstandard1.4/PostDriver.Domain.dll": "c:\\Users\\marcin.lapinski\\Documents\\Project\\PostDriver\\PostDriver.Domain\\bin\\placeholder\\netstandard1.4\\PostDriver.Domain.dll"
       },
       "frameworks": {
         "netstandard1.4": {
