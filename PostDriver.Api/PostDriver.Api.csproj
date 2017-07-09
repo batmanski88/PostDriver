@@ -16,7 +16,9 @@
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.0.2"/>
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.0.3"/>
     <PackageReference Include="AngularJS.Core" Version="1.6.4"/>
-    <PackageReference Include="Geocoding.NetCore.APIs" Version="1.0.0"/>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.1.0"/>
+    <PackageReference Include="AutoMapper" Version="6.1.1"/>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3"/>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="1.1.2"/>
   </ItemGroup>
 </Project>
