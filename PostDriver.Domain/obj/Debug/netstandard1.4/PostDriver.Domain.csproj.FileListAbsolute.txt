@@ -1,0 +1,6 @@
+c:\Users\marcin.lapinski\Documents\Projects\PostDriver\PostDriver.Domain\bin\Debug\netstandard1.4\PostDriver.Domain.deps.json
+c:\Users\marcin.lapinski\Documents\Projects\PostDriver\PostDriver.Domain\bin\Debug\netstandard1.4\PostDriver.Domain.dll
+c:\Users\marcin.lapinski\Documents\Projects\PostDriver\PostDriver.Domain\bin\Debug\netstandard1.4\PostDriver.Domain.pdb
+c:\Users\marcin.lapinski\Documents\Projects\PostDriver\PostDriver.Domain\obj\Debug\netstandard1.4\PostDriver.Domain.AssemblyInfo.cs
+c:\Users\marcin.lapinski\Documents\Projects\PostDriver\PostDriver.Domain\obj\Debug\netstandard1.4\PostDriver.Domain.dll
+c:\Users\marcin.lapinski\Documents\Projects\PostDriver\PostDriver.Domain\obj\Debug\netstandard1.4\PostDriver.Domain.pdb

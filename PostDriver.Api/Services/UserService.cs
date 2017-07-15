@@ -1,6 +1,7 @@
 
 using System;
 using System.Threading.Tasks;
+using AutoMapper;
 using PostDriver.Api.ViewModels.AccountViewModels;
 using PostDriver.Domain.Domain;
 using PostDriver.Domain.IRepository;
@@ -11,25 +12,20 @@ namespace PostDriver.Api.Services
     {
         private readonly IUserRepo _userRepo;
         private readonly IEncrypter _encrypter;
+        private readonly IMapper _mapper;
 
-        public UserService(IUserRepo userRepo, IEncrypter encrypter)
+        public UserService(IUserRepo userRepo, IEncrypter encrypter, IMapper mapper)
         {
             _userRepo = userRepo;
             _encrypter = encrypter;
+            _mapper = mapper;
         }
 
         public async Task<UserViewModel> GetUserByIdAsync(Guid UserId)
         {
             var user = await _userRepo.GetUserByIdAsync(UserId);
 
-            UserViewModel viewModel = new UserViewModel
-            {
-                Username = user.UserName,
-                FullName = user.FullName,
-                Role = user.Role,
-            }; 
-
-            return viewModel;
+            return _mapper.Map<User, UserViewModel>(user);
         }
 
         public async Task LoginAsync(LoginViewModel model)
@@ -63,5 +59,6 @@ namespace PostDriver.Api.Services
 
             user = new User(model.Username, model.Email, hash, salt, model.Role);
             await _userRepo.AddUserAsync(user); 
+        }
     }
 }
