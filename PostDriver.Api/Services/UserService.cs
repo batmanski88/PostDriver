@@ -14,11 +14,10 @@ namespace PostDriver.Api.Services
         private readonly IEncrypter _encrypter;
         private readonly IMapper _mapper;
 
-        public UserService(IUserRepo userRepo, IEncrypter encrypter, IMapper mapper)
+        public UserService(IUserRepo userRepo, IEncrypter encrypter)
         {
             _userRepo = userRepo;
             _encrypter = encrypter;
-            _mapper = mapper;
         }
 
         public async Task<UserViewModel> GetUserByIdAsync(Guid UserId)

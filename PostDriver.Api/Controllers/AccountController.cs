@@ -18,9 +18,7 @@ namespace PostDriver.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Register()
         { 
-            var model = new RegisterViewModel();
-
-            return View(model);
+            return View();
         }
 
         [HttpPost]
@@ -39,9 +37,7 @@ namespace PostDriver.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Login()
         {
-            var model = new LoginViewModel();
-
-            return View(model);
+            return View();
         }
 
         [HttpPost]

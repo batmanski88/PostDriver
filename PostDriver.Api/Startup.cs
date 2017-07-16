@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using PostDriver.Api.Infrastructure.Mappers;
 using PostDriver.Api.Infrastructure.Settings;
 using PostDriver.Api.Services;
 
@@ -22,7 +23,7 @@ namespace PostDriver.Api
 
         public IConfigurationRoot Configuration {get; }
         public IContainer ApplicationContainer {get; private set; }
-
+        public IConfiguration Config {get; set;}
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -39,11 +40,12 @@ namespace PostDriver.Api
             services.AddMvc();
 
             var builder = new ContainerBuilder();
+            builder.Populate(services);
+            builder.RegisterInstance(AutoMapperConfig.Initialize());
             builder.RegisterType<CompanyService>().As<ICompanyService>();
             builder.RegisterType<Encrypter>().As<IEncrypter>();
             builder.RegisterType<JwtHandler>().As<IJwtHandler>();
             builder.RegisterType<UserService>().As<IUserService>();
-            builder.Populate(services);
             
             this.ApplicationContainer = builder.Build();
 
@@ -51,35 +53,29 @@ namespace PostDriver.Api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IApplicationLifetime appLifetime)
         {
             loggerFactory.AddConsole();
+            
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });
-
             app.UseStaticFiles();
 
-            app.UseMvc();
+            app.UseMvc(routes => {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}"
+                );
+            });
 
             var jwtSetting = app.ApplicationServices.GetService<JwtSettings>();
-            app.UseJwtBearerAuthentication(new JwtBearerOptions {
+            app.UseJwtBearerAuthentication();
 
-                AutomaticAuthenticate = true,
-                TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidIssuer = "http://localhost/5000",
-                    ValidateAudience = false,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSetting.Key))
-                }
-            });
+            appLifetime.ApplicationStopped.Register(() => this.ApplicationContainer.Dispose());
         }
     }
 }

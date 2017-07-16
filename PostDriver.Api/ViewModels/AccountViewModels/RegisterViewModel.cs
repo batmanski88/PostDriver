@@ -6,6 +6,6 @@ namespace PostDriver.Api.ViewModels.AccountViewModels
         public string Password {get; set; }
         public string ConfirmPassword {get; set; }
         public string Username {get; set; }
-        public string Role {get; set; }
+        public string Role {get; set;}
     }
 }

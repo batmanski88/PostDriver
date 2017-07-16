@@ -13,7 +13,7 @@
     </environment>
     </head>
     <body>
-        <div class="container">
+        <div class="container body-content" ng-app="postDriver">
             @RenderBody()
         </div>
         <environment names="Development">
@@ -21,7 +21,12 @@
             <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
             <script src="~/lib/jquery/dist/jquery.js"></script>
         </environment>
+        <environment names="Staging,Production">
+            <script src="~/lib/angularjs/angular.min.js"></script>
+            <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+            <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        </environment>
 
         @RenderSection("Scripts", required: false)
     </body>
-</html>
+</html> 
