@@ -1,6 +1,11 @@
 using System;
 using PostDriver.Api.ViewModels.Jwt;
 using PostDriver.Api.Infrastructure.Settings;
+using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
+using PostDriver.Api.Infrastructure.Extensions;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace PostDriver.Api.Services
 {
@@ -16,7 +21,34 @@ namespace PostDriver.Api.Services
 
         public JwtViewModel CreateToken(Guid userId, string role)
         {
-            throw new NotImplementedException();
+            var now = DateTime.UtcNow;
+
+            var claims = new Claim[]
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()),
+                new Claim(JwtRegisteredClaimNames.UniqueName, userId.ToString()),
+                new Claim(ClaimTypes.Role, role),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.Iat, now.ToTimestamp().ToString(), ClaimValueTypes.Integer64) 
+            };
+
+            var expires = now.AddMinutes(_settings.ExpiryMinutes);
+            var signingCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_settings.Key)), SecurityAlgorithms.HmacSha256);
+            var jwt = new JwtSecurityToken(
+                issuer: _settings.Issuer,
+                claims: claims,
+                notBefore: now,
+                expires: expires,
+                signingCredentials: signingCredentials
+            );
+
+            var token = new JwtSecurityTokenHandler().WriteToken(jwt);
+
+            return new JwtViewModel
+            {
+                Token = token,
+                Expires = expires.ToTimestamp()
+            };
         }
     }
 }

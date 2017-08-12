@@ -4,9 +4,9 @@ using PostDriver.Api.ViewModels.AccountViewModels;
 
 namespace PostDriver.Api.Services
 {
-    public interface IUserService
+    public interface IUserService : IService
     {
-        Task<UserViewModel> GetUserByIdAsync(Guid UserId);
+        Task<UserViewModel> GetUserByEmailAsync(string Email);
         
         Task RegisterAsync(RegisterViewModel model);
 

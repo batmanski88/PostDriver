@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Dapper;
 using PostDriver.Domain.Domain;
-using PostDriver.Domain.Infrastructure.Factories;
 using PostDriver.Domain.IRepository;
 
 namespace PostDriver.Domain.Repository
@@ -11,7 +10,12 @@ namespace PostDriver.Domain.Repository
     public class CompanyRepo : ICompanyRepo
     {
         private readonly string connectionString;
-        private readonly ConnectionFactory _connection;
+        private readonly IConnectionFactory _connection;
+
+        public CompanyRepo(IConnectionFactory connection)
+        {
+            _connection = connection;
+        }
 
         public async Task AddCompanyAsync(Company Company)
         {

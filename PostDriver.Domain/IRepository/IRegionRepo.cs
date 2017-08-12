@@ -5,7 +5,7 @@ using PostDriver.Domain.Domain;
 
 namespace PostDriver.Domain.IRepository
 {
-    public interface IRegionRepo
+    public interface IRegionRepo : IRepository
     {
         Task<Region> GetRegionByIdAsync(Guid Id);
         Task<IEnumerable<Region>> GetRegionByOfficeIdAsync(Guid OfficeId);

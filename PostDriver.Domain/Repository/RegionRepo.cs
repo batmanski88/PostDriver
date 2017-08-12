@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Dapper;
 using PostDriver.Domain.Domain;
-using PostDriver.Domain.Infrastructure.Factories;
 using PostDriver.Domain.IRepository;
 
 namespace PostDriver.Domain.Repository

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -12,18 +13,21 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using PostDriver.Api.Infrastructure.IoC;
 using PostDriver.Api.Infrastructure.Mappers;
 using PostDriver.Api.Infrastructure.Settings;
 using PostDriver.Api.Services;
+using PostDriver.Domain.IRepository;
+using PostDriver.Domain.Repository;
 
 namespace PostDriver.Api
 {
     public class Startup
     {
 
-        public IConfigurationRoot Configuration {get; }
-        public IContainer ApplicationContainer {get; private set; }
-        public IConfiguration Config {get; set;}
+        public IConfiguration Configuration {get; }
+        public IContainer ApplicationContainer { get; private set; }
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -38,18 +42,13 @@ namespace PostDriver.Api
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-
+            
             var builder = new ContainerBuilder();
             builder.Populate(services);
-            builder.RegisterInstance(AutoMapperConfig.Initialize());
-            builder.RegisterType<CompanyService>().As<ICompanyService>();
-            builder.RegisterType<Encrypter>().As<IEncrypter>();
-            builder.RegisterType<JwtHandler>().As<IJwtHandler>();
-            builder.RegisterType<UserService>().As<IUserService>();
-            
-            this.ApplicationContainer = builder.Build();
+            builder.RegisterModule(new ContainerModule(Configuration));
+            ApplicationContainer = builder.Build();
 
-            return new AutofacServiceProvider(ApplicationContainer);
+            return new AutofacServiceProvider(ApplicationContainer);         
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -73,9 +72,18 @@ namespace PostDriver.Api
             });
 
             var jwtSetting = app.ApplicationServices.GetService<JwtSettings>();
-            app.UseJwtBearerAuthentication();
+            app.UseJwtBearerAuthentication(new JwtBearerOptions{
 
-            appLifetime.ApplicationStopped.Register(() => this.ApplicationContainer.Dispose());
+                AutomaticAuthenticate = true,
+                TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidIssuer = jwtSetting.Issuer,
+                    ValidateAudience = false,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSetting.Key))
+                }
+            });
+
+            appLifetime.ApplicationStopped.Register(() => ApplicationContainer.Dispose());
         }
     }
 }

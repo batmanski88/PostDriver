@@ -4,16 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using PostDriver.Domain.Domain;
-using PostDriver.Domain.Infrastructure.Factories;
+using PostDriver.Domain.IRepository;
 
 namespace PostDriver.Domain.Repository
 {
-    public class UserRepo
+    public class UserRepo : IUserRepo
     {
-        private readonly string connectionString;
-        private readonly ConnectionFactory _connection;
+        private readonly string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=PostDriver;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        private readonly IConnectionFactory _connection;
 
-        public UserRepo(ConnectionFactory connection)
+        public UserRepo(IConnectionFactory connection)
         {
             _connection = connection;
         }
@@ -21,7 +21,7 @@ namespace PostDriver.Domain.Repository
         public async Task AddUserAsync(User User)
         {
             var connect = _connection.Connect(connectionString);
-            await connect.ExecuteAsync("INSERT INTO Users (Email, Password, ConfirmPassword, FullName, UserName, Role, CreatedAt) VALUES (@Email, @Password, @ConfirmPassword, @FullName, @Username, @Role, @CreatedAt)", User);
+            await connect.ExecuteAsync("INSERT INTO Users (UserName, Email, Password, FullName, Role, CreatedAt) VALUES (@Username, @Email, @Password, @FullName, @Role, @CreatedAt)", User);
         }
 
         public async Task<User> GetUserByEmailAsync(string Email)

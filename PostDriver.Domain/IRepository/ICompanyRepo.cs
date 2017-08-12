@@ -5,7 +5,7 @@ using PostDriver.Domain.Domain;
 
 namespace PostDriver.Domain.IRepository
 {
-    public interface ICompanyRepo
+    public interface ICompanyRepo : IRepository
     {
         Task<Company> GetCompanyByIdAsync(Guid Id);
         Task<Company> GetCompanyByNameAsync(string Name);
