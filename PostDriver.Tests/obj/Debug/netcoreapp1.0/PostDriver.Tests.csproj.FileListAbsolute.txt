@@ -1,0 +1,16 @@
+C:\Users\marcin.lapinski\Documents\Projects\PostDriver\PostDriver.Tests\bin\Debug\netcoreapp1.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+C:\Users\marcin.lapinski\Documents\Projects\PostDriver\PostDriver.Tests\bin\Debug\netcoreapp1.0\xunit.runner.utility.dotnet.dll
+C:\Users\marcin.lapinski\Documents\Projects\PostDriver\PostDriver.Tests\bin\Debug\netcoreapp1.0\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\marcin.lapinski\Documents\Projects\PostDriver\PostDriver.Tests\bin\Debug\netcoreapp1.0\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\marcin.lapinski\Documents\Projects\PostDriver\PostDriver.Tests\bin\Debug\netcoreapp1.0\PostDriver.Tests.deps.json
+C:\Users\marcin.lapinski\Documents\Projects\PostDriver\PostDriver.Tests\bin\Debug\netcoreapp1.0\PostDriver.Tests.runtimeconfig.json
+C:\Users\marcin.lapinski\Documents\Projects\PostDriver\PostDriver.Tests\bin\Debug\netcoreapp1.0\PostDriver.Tests.runtimeconfig.dev.json
+C:\Users\marcin.lapinski\Documents\Projects\PostDriver\PostDriver.Tests\bin\Debug\netcoreapp1.0\PostDriver.Tests.dll
+C:\Users\marcin.lapinski\Documents\Projects\PostDriver\PostDriver.Tests\bin\Debug\netcoreapp1.0\PostDriver.Tests.pdb
+C:\Users\marcin.lapinski\Documents\Projects\PostDriver\PostDriver.Tests\bin\Debug\netcoreapp1.0\PostDriver.Api.dll
+C:\Users\marcin.lapinski\Documents\Projects\PostDriver\PostDriver.Tests\bin\Debug\netcoreapp1.0\PostDriver.Domain.dll
+C:\Users\marcin.lapinski\Documents\Projects\PostDriver\PostDriver.Tests\bin\Debug\netcoreapp1.0\PostDriver.Api.pdb
+C:\Users\marcin.lapinski\Documents\Projects\PostDriver\PostDriver.Tests\bin\Debug\netcoreapp1.0\PostDriver.Domain.pdb
+C:\Users\marcin.lapinski\Documents\Projects\PostDriver\PostDriver.Tests\obj\Debug\netcoreapp1.0\PostDriver.Tests.AssemblyInfo.cs
+C:\Users\marcin.lapinski\Documents\Projects\PostDriver\PostDriver.Tests\obj\Debug\netcoreapp1.0\PostDriver.Tests.dll
+C:\Users\marcin.lapinski\Documents\Projects\PostDriver\PostDriver.Tests\obj\Debug\netcoreapp1.0\PostDriver.Tests.pdb

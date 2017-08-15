@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using Newtonsoft.Json;
 using PostDriver.Api.Infrastructure.Extensions;
 using PostDriver.Api.Services;
 using PostDriver.Api.ViewModels.AccountViewModels;
@@ -27,8 +28,9 @@ namespace PostDriver.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterViewModel model)
+        public async Task<IActionResult> Register([FromBody]RegisterViewModel model)
         {
+            
             if(ModelState.IsValid)
             {
                 await _userService.RegisterAsync(model);
@@ -46,19 +48,22 @@ namespace PostDriver.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> Login([FromBody]LoginViewModel model)
         {
             if(ModelState.IsValid)
             {
                 await _userService.LoginAsync(model);
 
-                var tokenId = Guid.NewGuid();
+                model.TokenId = Guid.NewGuid();
                 var user = await _userService.GetUserByEmailAsync(model.Email);
-                _cache.GetJwt(tokenId);
+                var jwt = _cache.GetJwt(model.TokenId);
                 
+                return Json(jwt);
             }   
+            
+            ModelState.Clear();
 
-            return View();
+            return View(model);
         }
     }
 }

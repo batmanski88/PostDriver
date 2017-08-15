@@ -43,12 +43,14 @@ namespace PostDriver.Api.Services
                 throw new Exception("Użytkownik nie istnieje!");
             }
             
+            var token = _jwtHandler.CreateToken(user.UserId, user.Role);
+            _cache.SetJwt(token);
+
             var hash = _encrypter.GetHash(model.Password, user.Salt);
 
             if(user.Password == hash)
             {
-                var token = _jwtHandler.CreateToken(user.UserId, user.Role);
-                _cache.SetJwt(token);
+               return;
             }
         }
 
@@ -60,11 +62,13 @@ namespace PostDriver.Api.Services
             {
                 throw new Exception($"Użytkownik o podanym adresie email: '{model.Email}' już istnieje!");
             }
+
+            var role = "user";
             
             var salt = _encrypter.GetSalt(model.Password);
             var hash = _encrypter.GetHash(model.Password, salt);
 
-            user = new User(model.Username, model.Email, hash, salt, model.Role);
+            user = new User(Guid.NewGuid(), model.Username, model.Email, hash, salt, role);
             await _userRepo.AddUserAsync(user); 
         }
     }

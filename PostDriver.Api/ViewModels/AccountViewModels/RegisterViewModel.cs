@@ -1,12 +1,16 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace PostDriver.Api.ViewModels.AccountViewModels
 {
     public class RegisterViewModel
-    {
+    {   
+        [Key]
+        public Guid UserId {get; set;}
+
         [Display(Name = "Email: ")]
         [Required(ErrorMessage = "Pole wymagane.")]
-        [EmailAddress(ErrorMessage = "Wpisz poprawny adress email.")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "Wpisz poprawny adress email.")]
         public string Email {get; set; }
 
         [Display(Name = "Hasło: ")]
@@ -23,6 +27,6 @@ namespace PostDriver.Api.ViewModels.AccountViewModels
         [Display(Name = "Nazwa użytkownika: ")]
         [Required(ErrorMessage = "Pole wymagane.")]
         public string Username {get; set; }
-        public string Role {get; set;}
+     
     }
 }

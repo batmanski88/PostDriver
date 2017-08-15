@@ -10,9 +10,9 @@ namespace PostDriver.Domain.Repository
 {
     public class UserRepo : IUserRepo
     {
-        private readonly string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=PostDriver;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        private readonly string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\marcin.lapinski\\Documents\\PostDriver.mdf;Integrated Security=True;Connect Timeout=30";
         private readonly IConnectionFactory _connection;
-
+        
         public UserRepo(IConnectionFactory connection)
         {
             _connection = connection;
@@ -21,20 +21,20 @@ namespace PostDriver.Domain.Repository
         public async Task AddUserAsync(User User)
         {
             var connect = _connection.Connect(connectionString);
-            await connect.ExecuteAsync("INSERT INTO Users (UserName, Email, Password, FullName, Role, CreatedAt) VALUES (@Username, @Email, @Password, @FullName, @Role, @CreatedAt)", User);
+            await connect.ExecuteAsync("INSERT INTO [dbo].[Users] ([UserId], [UserName], [Email], [Password], [Salt], [FullName], [Role], [CreatedAt]) VALUES (@UserId, @Username, @Email, @Password, @Salt, @FullName, @Role, @CreatedAt)", new {User.UserId, User.UserName, User.Email, User.Password, User.Salt, User.FullName, User.Role, User.CreatedAt});
         }
 
         public async Task<User> GetUserByEmailAsync(string Email)
         {
             var connect = _connection.Connect(connectionString);
-            var user = await Task.FromResult(connect.QueryFirstOrDefault<User>("SELECT * FROM Users WHERE Email = @Email"));
+            var user = await connect.QueryFirstOrDefaultAsync<User>("SELECT * FROM [dbo].[Users] WHERE Email = @Email", new { Email });
             return user;
         }
 
         public async Task<User> GetUserByIdAsync(Guid Id)
         {
             var connect = _connection.Connect(connectionString);
-            var user = await Task.FromResult(connect.QueryFirstOrDefault<User>("SELECT * FROM Users WHERE Email = @Id"));
+            var user = await Task.FromResult(connect.QueryFirstOrDefault<User>("SELECT * FROM Users WHERE Email = @Id", new { Id }));
             return user;
         }
 
@@ -54,7 +54,7 @@ namespace PostDriver.Domain.Repository
         public async Task UpdateUserAsync(User User)
         {
             var connect = _connection.Connect(connectionString);
-            await connect.ExecuteAsync("UPDATE Users u SET u.Email = @Email, u.Password = @Password, u.ConfirmPassword = @ConfirmPassword, u.FullName = @FullName, u.UserName = @UserName, u.Role = @Role , u.UpdateAt = @UpdateAt", User);
+            await connect.ExecuteAsync("UPDATE Users u SET u.Email = @Email, u.Password = @Password, u.ConfirmPassword = @ConfirmPassword, u.FullName = @FullName, u.UserName = @UserName, u.Role = @Role , u.UpdateAt = @UpdateAt", new {User.UserName, User.Email, User.Password, User.Salt, User.FullName, User.Role, User.UpdatedAt});
         }
     }
 }

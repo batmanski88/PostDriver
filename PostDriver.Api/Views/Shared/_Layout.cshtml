@@ -17,14 +17,17 @@
             @RenderBody()
         </div>
         <environment names="Development">
+            <script src="~/lib/jquery/dist/jquery.js"></script>
             <script src="~/lib/angularjs/angular.js"></script>
             <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
-            <script src="~/lib/jquery/dist/jquery.js"></script>
+            <script src="/lib/ngmap/build/scripts/ng-map.js"> </script>
+            <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&callback=onGoogleReady"></script>
         </environment>
         <environment names="Staging,Production">
+            <script src="~/lib/jquery/dist/jquery.min.js"></script>
             <script src="~/lib/angularjs/angular.min.js"></script>
             <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-            <script src="~/lib/jquery/dist/jquery.min.js"></script>
+            <script src="/lib/ngmap/build/scripts/ng-map.min.js"> </script>
         </environment>
 
         @RenderSection("Scripts", required: false)

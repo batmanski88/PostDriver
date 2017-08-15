@@ -56,7 +56,7 @@ namespace PostDriver.Api
         {
             loggerFactory.AddConsole();
             
-
+            service.AddMemoryCache();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
