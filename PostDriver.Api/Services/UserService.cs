@@ -37,21 +37,22 @@ namespace PostDriver.Api.Services
         public async Task LoginAsync(LoginViewModel model)
         {
             var user = await _userRepo.GetUserByEmailAsync(model.Email);
+            
 
             if(user == null)
             {
                 throw new Exception("Użytkownik nie istnieje!");
             }
             
-            var token = _jwtHandler.CreateToken(user.UserId, user.Role);
-            _cache.SetJwt(token);
-
             var hash = _encrypter.GetHash(model.Password, user.Salt);
 
             if(user.Password == hash)
             {
                return;
             }
+
+            var token = _jwtHandler.CreateToken(user.UserId, user.Role);
+            _cache.SetJwt(model.TokenId, token);
         }
 
         public async Task RegisterAsync(RegisterViewModel model)

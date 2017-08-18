@@ -58,10 +58,10 @@ namespace PostDriver.Api.Controllers
                 var user = await _userService.GetUserByEmailAsync(model.Email);
                 var jwt = _cache.GetJwt(model.TokenId);
                 
+                
                 return Json(jwt);
             }   
             
-            ModelState.Clear();
 
             return View(model);
         }

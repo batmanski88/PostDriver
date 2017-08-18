@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
+using Newtonsoft.Json;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -41,8 +42,10 @@ namespace PostDriver.Api
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthorization(x => x.AddPolicy("user", p => p.RequireRole("user")));
+            services.AddMemoryCache();
             services.AddMvc();
-            
+
             var builder = new ContainerBuilder();
             builder.Populate(services);
             builder.RegisterModule(new ContainerModule(Configuration));
@@ -56,7 +59,6 @@ namespace PostDriver.Api
         {
             loggerFactory.AddConsole();
             
-            service.AddMemoryCache();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -71,15 +73,15 @@ namespace PostDriver.Api
                 );
             });
 
-            var jwtSetting = app.ApplicationServices.GetService<JwtSettings>();
+            var jwtSettings = app.ApplicationServices.GetService<JwtSettings>();
             app.UseJwtBearerAuthentication(new JwtBearerOptions{
 
                 AutomaticAuthenticate = true,
                 TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidIssuer = jwtSetting.Issuer,
+                    ValidIssuer = jwtSettings.Issuer,
                     ValidateAudience = false,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSetting.Key))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key))
                 }
             });
 

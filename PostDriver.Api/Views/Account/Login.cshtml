@@ -35,7 +35,8 @@
         app.controller('loginController', ['$scope', '$http', function($scope, $http){
                 
             $scope.model = {};
-            
+            $http.jwt = {};
+
             $scope.login = function() {
                 $http({
                     method: 'post',
