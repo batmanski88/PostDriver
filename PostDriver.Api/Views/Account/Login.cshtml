@@ -4,7 +4,13 @@
 <section id="Login">
     <div class="row" ng-controller="loginController">
         <h4>Logowanie użytkownika</h4>
-        <form method="post" class="form-horizontal" name="loginForm" ng-submit="login()">
+        <form method="post" class="form-horizontal" asp-controller="Account" asp-action="Login" name="loginForm" ng-submit="login()">
+            <div class="form-group">
+                <label asp-for="TokenId" class="col-md-2"></label>
+                <div class="col-md-8">
+                    <input asp-for="TokenId" class="form-control" ng-model="model.TokenId"/>
+                </div>
+            </div>
             <div class="form-group">
                 <label asp-for="Email" class="col-md-2"></label>
                 <div class="col-md-8">
@@ -21,7 +27,6 @@
             </div>
             <button type="submit" class="btn-primary">Zaloguj</button>
         </form>
-        <pre>token = {{jwt | json}}</pre>
     </div>
 </section>
 
@@ -34,8 +39,8 @@
 
         app.controller('loginController', ['$scope', '$http', function($scope, $http){
                 
-            $scope.model = {};
-            $http.jwt = {};
+            $scope.model = {TokenId: $http.get('Login', data)};
+
 
             $scope.login = function() {
                 $http({

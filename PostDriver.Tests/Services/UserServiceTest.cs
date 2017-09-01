@@ -41,7 +41,7 @@ namespace PostDriver.Tests.Services
         }
 
         [Fact]
-        public async Task where_calling_get_user_by_mail_async_and_user_exists_it_should_invoke_user_repository_get_user_by_email_async()
+        public async Task where_calling_get_user_by_email_async_and_user_exists_it_should_invoke_user_repository_get_user_by_email_async()
         {
             var userRepositoryMock = new Mock<IUserRepo>();
             var encrypterMock = new Mock<IEncrypter>();
@@ -59,6 +59,26 @@ namespace PostDriver.Tests.Services
             
 
             userRepositoryMock.Setup(x => x.GetUserByEmailAsync(It.IsAny<string>())).ReturnsAsync(user);
+
+            userRepositoryMock.Verify(x => x.GetUserByEmailAsync(It.IsAny<string>()), Times.Once);
+        }
+
+        [Fact]
+        public async Task Where_calling_get_user_by_email_async_and_user_not_extsts_it_should_invoke_user_repository_get_user_by_email_async()
+        {
+            var userRepositoryMock = new Mock<IUserRepo>();
+            var encrypterMock = new Mock<IEncrypter>();
+            encrypterMock.Setup(x => x.GetSalt(It.IsAny<string>())).Returns("hash");
+            encrypterMock.Setup(x => x.GetHash(It.IsAny<string>(), It.IsAny<string>())).Returns("salt");
+            var jwtHandlerMock = new Mock<IJwtHandler>();
+            var cacheMock = new Mock<IMemoryCache>();
+            var mapperMock = new Mock<IMapper>();
+           
+            var userService = new UserService(userRepositoryMock.Object, encrypterMock.Object, jwtHandlerMock.Object, cacheMock.Object, mapperMock.Object);
+
+            await userService.GetUserByEmailAsync("user1@mail.com");
+
+            userRepositoryMock.Setup(x => x.GetUserByEmailAsync("user@mail.com")).ReturnsAsync(() => null);
 
             userRepositoryMock.Verify(x => x.GetUserByEmailAsync(It.IsAny<string>()), Times.Once);
         }

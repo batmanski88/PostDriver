@@ -36,7 +36,6 @@ namespace PostDriver.Api.Services
             var signingCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_settings.Key)), SecurityAlgorithms.HmacSha256);
             var jwt = new JwtSecurityToken(
                 issuer: _settings.Issuer,
-                audience: "http://localhost:5000",
                 claims: claims,
                 notBefore: now,
                 expires: expires,

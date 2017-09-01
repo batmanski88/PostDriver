@@ -8,7 +8,14 @@ namespace PostDriver.Api.Infrastructure.IoC.Modules
     {
         protected override void Load(ContainerBuilder builder)
         {
-           
+            builder.RegisterType<PostOfficeService>()
+                   .As<IPostOfficeService>()
+                   .InstancePerLifetimeScope();
+
+            builder.RegisterType<CompanyService>()
+                   .As<ICompanyService>()
+                   .InstancePerLifetimeScope();
+                   
             builder.RegisterType<UserService>()
                    .As<IUserService>()
                    .InstancePerLifetimeScope();

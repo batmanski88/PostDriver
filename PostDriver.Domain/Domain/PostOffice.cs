@@ -7,17 +7,21 @@ namespace PostDriver.Domain.Domain
         public Guid OfficeId {get; protected set; }
         public string Name {get; protected set; }
         public string Adress {get; protected set; }
-        public double Longtitude {get; protected set; }
+        public double Longitude {get; protected set; }
         public double Latitude {get; protected set; }
 
-        public PostOffice()
+        protected  PostOffice()
         {
 
         }
 
-        public PostOffice(string name, string adress, double longtitude, double latitude)
+        public PostOffice(Guid officeId, string name, string adress, double longitude, double latitude)
         {
-            
+            OfficeId = officeId;
+            SetName(name);
+            SetAdress(adress);
+            SetLongitude(longitude);
+            SetLatitude(latitude);
         }
 
         public void SetOfficeId(Guid officeId)
@@ -43,13 +47,13 @@ namespace PostDriver.Domain.Domain
            Adress = adress;
         }
 
-        public void  SetLongtitude(double longtitude)
+        public void  SetLongitude(double longitude)
         {
-           if(Longtitude == longtitude)
+           if(Longitude == longitude)
            {
                return;
            }
-           Longtitude = longtitude;
+           Longitude = longitude;
         }
 
         public void SetLatitude(double latitude)

@@ -45,14 +45,11 @@ namespace PostDriver.Api.Services
             }
             
             var hash = _encrypter.GetHash(model.Password, user.Salt);
-
+            var token = _jwtHandler.CreateToken(user.UserId, user.Role);
             if(user.Password == hash)
             {
-               return;
+               _cache.SetJwt(model.TokenId, token);
             }
-
-            var token = _jwtHandler.CreateToken(user.UserId, user.Role);
-            _cache.SetJwt(model.TokenId, token);
         }
 
         public async Task RegisterAsync(RegisterViewModel model)

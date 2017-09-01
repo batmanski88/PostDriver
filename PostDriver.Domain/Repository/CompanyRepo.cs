@@ -9,7 +9,7 @@ namespace PostDriver.Domain.Repository
 {
     public class CompanyRepo : ICompanyRepo
     {
-        private readonly string connectionString;
+        private readonly string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=PostDriver;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         private readonly IConnectionFactory _connection;
 
         public CompanyRepo(IConnectionFactory connection)
@@ -23,12 +23,11 @@ namespace PostDriver.Domain.Repository
             await connect.ExecuteAsync("INSERT INTO Companies (CompanyId, RegionId, Name, Adress, Longtitude, Latitude, StartHour, FinishHour) VALUES (@CompanyId, @RegionId, @Name, @Adress, @Longtitude, @Latitude, @StartHour@, @FinishHour) FROM Companies c INNER JOIN Regions r ON c.RegionId = r.REgionId", new {Company.CompanyId, Company.RegionId, Company.Name, Company.Adress, Company.Longtitude, Company.Latitude, Company.StartHour, Company.FinishHour});
         }
 
-        public async Task<IEnumerable<Company>> GetCompaniesByRegionIdAsync(Guid RegionId)
+        public async Task<IEnumerable<Company>> GetCompaniesAsync()
         {
             var connect = _connection.Connect(connectionString);
-            var companies = await Task.FromResult(connect.Query<Company>("SELECT * FROM Companies WHERE RegionID = @RegionId", new {RegionId}));
+            return  await connect.QueryAsync<Company>("SELECT * FROM Companies");
 
-            return companies;
         }
 
         public async Task<Company> GetCompanyByIdAsync(Guid Id)

@@ -5,6 +5,7 @@ namespace PostDriver.Api.ViewModels.AccountViewModels
 {
     public class LoginViewModel
     {   
+        
         public Guid TokenId {get ; set; }
         
         [Display(Name = "Email: ")]

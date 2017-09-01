@@ -18,15 +18,16 @@ namespace PostDriver.Domain.Domain
 
        }
 
-       public Company(Guid RegionId, string name,string adress, double longtitude, double latitude, DateTime starHour, DateTime finishHour)
+       public Company(Guid regionId, Guid companyId, string name,string adress, double longtitude, double latitude, DateTime starHour, DateTime finishHour)
        {
-            CompanyId = Guid.NewGuid();
-            Name = name;
-            StartHour = starHour;
-            FinishHour = finishHour;
-            Adress = adress;
-            Longtitude = longtitude;
-            Latitude = latitude;
+            CompanyId = companyId;
+            SetRegionId(regionId);
+            SetName(name);
+            SetAdress(adress);
+            SetLongtitude(longtitude);
+            SetLatitude(latitude);
+            SetStartHour(starHour);
+            SetFinishHour(finishHour);
        }
 
       

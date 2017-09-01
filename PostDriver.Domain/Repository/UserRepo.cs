@@ -10,7 +10,7 @@ namespace PostDriver.Domain.Repository
 {
     public class UserRepo : IUserRepo
     {
-        private readonly string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\marcin.lapinski\\Documents\\PostDriver.mdf;Integrated Security=True;Connect Timeout=30";
+        private readonly string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=PostDriver;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         private readonly IConnectionFactory _connection;
         
         public UserRepo(IConnectionFactory connection)

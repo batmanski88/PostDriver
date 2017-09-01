@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -44,17 +45,20 @@ namespace PostDriver.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Login()
         {
-            return View();
+            var model = new LoginViewModel
+            {
+                TokenId = Guid.NewGuid()
+            };
+
+            return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login([FromBody]LoginViewModel model)
+        public async Task<IActionResult> Login([FromForm]LoginViewModel model)
         {
             if(ModelState.IsValid)
             {
                 await _userService.LoginAsync(model);
-
-                model.TokenId = Guid.NewGuid();
                 var user = await _userService.GetUserByEmailAsync(model.Email);
                 var jwt = _cache.GetJwt(model.TokenId);
                 
