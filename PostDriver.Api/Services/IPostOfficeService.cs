@@ -10,6 +10,7 @@ namespace PostDriver.Api.Services
          Task<IEnumerable<PostOfficeViewModel>> GetOfficesAsync();
          Task AddOfficeAsync(AddPostOfficeViewModel model);
          Task RemoveOffice(Guid OfficeId);
+         Task<PostOfficeViewModel> GetPostOfficeByNameAsync(string Name);
     
     }
 }

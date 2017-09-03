@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using PostDriver.Api.ViewModels.CompanyViewModels;
 using PostDriver.Domain.Domain;
 using PostDriver.Domain.Repository;
-using Linq;
 using AutoMapper;
 
 namespace PostDriver.Api.Services
@@ -41,7 +40,7 @@ namespace PostDriver.Api.Services
 
         public async Task<IEnumerable<CompanyViewModel>> GetCompaniesAsync(Guid RegionId)
         {
-            
+            throw new NotImplementedException();
         }
 
         public Task GetCompanyByIdAsync(Guid RegionId)

@@ -39,6 +39,13 @@ namespace PostDriver.Api.Services
             return _mapper.Map<IEnumerable<PostOfficeViewModel>>(offices);
         }
 
+        public async Task<PostOfficeViewModel> GetPostOfficeByNameAsync(string Name)
+        {
+            var office = await _officeRepo.GetPostOfficeByName(Name);
+
+            return _mapper.Map<PostOfficeViewModel>(office);
+        }
+
         public async Task RemoveOffice(Guid OfficeId)
         {
             await _officeRepo.RemovePostOfficeAsync(OfficeId);

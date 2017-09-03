@@ -13,7 +13,7 @@ namespace PostDriver.Tests.Services
 {
     public class UserServiceTest
     {
-         [Fact]
+        [Fact]
         public async Task register_async_should_invoke_add_async_on_repository()
         {
             var userRepositoryMock = new Mock<IUserRepo>();
