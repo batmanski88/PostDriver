@@ -2,7 +2,7 @@
 
 <section>
     <div class="row" ng-controller="addOfficeController">
-        <form method="post" class="form-horizontal col-md-6" asp-controller="AdminPanel" asp-action="AddCompany" ng-submit="addOffice()">
+        <form method="post" class="form-horizontal col-md-6" asp-controller="AdminPanel" asp-action="AddPostOffice" ng-submit="addOffice()">
                 <div class="form-group">
                     <label asp-for="Name" class="col-md-2"></label>
                     <div class="col-md-8">
@@ -13,25 +13,25 @@
                  <div class="form-group">
                     <label asp-for="Adress" class="col-md-2"></label>
                     <div class="col-md-8">
-                        <input asp-for="Adress" class="form-control" ng-model="office.Adress"/>
+                        <input asp-for="Adress" class="form-control" ng-model="office.Address"/>
                         <span asp-validation-for="Adress"></span>
                     </div>
                 </div>
-                <button type="button" class="btn-primary btn">Koordynaty</button>
-                 <div class="form-group">
+                 <div class="form-group" hidden>
                     <label asp-for="Latitude" class="col-md-2"></label>
                     <div class="col-md-8">
                         <input asp-for="Latitude" class="form-control" ng-model="office.Latitude"/>
                         <span asp-validation-for="Latitude" class="text-danger"></span>
                     </div>
                 </div>
-                 <div class="form-group">
+                 <div class="form-group" hidden>
                     <label asp-for="Longitude" class="col-md-2"></label>
                     <div class="col-md-8">
                         <input asp-for="Longitude" class="form-control" ng-model="office.Longitude"/>
                         <span asp-validation-for="Longitude" class="text-danger"></span>
                     </div>
                 </div>
+                <button type="button" class="btn-primary btn col-md-4" ng-click="geocode()">Znajdź</button>
                 <button type="submit" class="btn-primary btn col-md-4">Dodaj</button>
         </form>
         <div class="col-md-6">
@@ -49,7 +49,7 @@
     <script>
             var app = angular.module('postDriver', []);
 
-            app.controller('addOfficeController', ['$scope', 'addFactory', function($scope, addFactory){
+            app.controller('addOfficeController', ['$scope', 'addOfficeFactory', function($scope, addOfficeFactory){
                 
                 var geocoder = new google.maps.Geocoder();
 
@@ -60,40 +60,40 @@
                     center: {lat: 52.32344, lng: 21.0089385}
             });
             
-            geocoder.geocode({'address': $scope.office.Adress}, function(results, status){
-                if(status == google.maps.GeocoderStatus.OK)
-                {
-                    map.setCenter(results[0].geometry.location);
-                    new google.maps.Marker({
-                        position: results[0].geometry.location
-                    });
-                    $scope.office.Latitude = results[0].geometry.location.lat();
-                    $scope.office.Longitude = results[0].geometry.location.lng();
-                }
+            $scope.geocode = function()
+            { 
+                geocoder.geocode({'address': $scope.office.Address}, function(results, status){
+                    if(status == google.maps.GeocoderStatus.OK)
+                    {
+                        map.setCenter(results[0].geometry.location);
+                        new google.maps.Marker({
+                            map: map,
+                            position: results[0].geometry.location
+                        });
+                        $scope.office.Latitude = results[0].geometry.location.lat();
+                        $scope.office.Longitude = results[0].geometry.location.lng();
+                    }
+                });
+            };
+            
+            addOfficeFactory('office', function(data)
+            {
+                $scope.addOffice = data;
             });
             
-            $scope.addOffice = addFactory.sendOffice($scope.office);
             }]);
 
-            app.factory('addFactory', ['$http', function($htpp){
+           app.factory('addOfficeFactory', ['$http', function($http){
 
-                var sendOffice = function(params)
-                {
-                    $http.post('AddPostOffice', params)
-                        .success(function(data)
-                        {
-                                console.log('data' + data);
-                        })
-                        .error(function(error)
-                        {
-                                console.log('error' + error);
-                        });
-                }
+               var url = 'AddPostOffice';
 
-                return {
-                    sendOffice: sendOffice.promise
-                };
-            }]);
+               return function(type, callback)
+               {
+                   callback = callback || function(){};
+                   
+                   $http({method: 'post', url: url});
+               };
+           }]);
         
     </script>
     

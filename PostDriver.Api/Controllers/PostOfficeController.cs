@@ -8,15 +8,23 @@ namespace PostDriver.Api.Controllers
     {
 
         private readonly IPostOfficeService _officeService; 
+        private readonly IRegionService _regionService;
 
-        public PostOfficeController(IPostOfficeService officeService)
+        public PostOfficeController(IPostOfficeService officeService, IRegionService regionService)
         {
             _officeService = officeService;
+            _regionService = regionService;
         }
-        public async Task<IActionResult> GetOfficesAsync()
+
+        public IActionResult Index()
         {
-            var ofiices = await _officeService.GetOfficesAsync();
-            return View(ofiices);
+            return View();
+        }
+        
+        public async Task<JsonResult> GetOfficesAsync()
+        {
+            var offices = await _officeService.GetOfficesAsync();
+            return Json(offices);
         }
     }
 }

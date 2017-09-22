@@ -25,6 +25,10 @@ namespace PostDriver.Api.Infrastructure.IoC.Modules
             builder.RegisterType<PostOfficeRepo>()
                    .As<IPostOfficeRepo>()
                    .InstancePerLifetimeScope();
+            
+            builder.RegisterType<RegionRepo>()
+                   .As<IRegionRepo>()
+                   .InstancePerLifetimeScope();
         }
     }
 }

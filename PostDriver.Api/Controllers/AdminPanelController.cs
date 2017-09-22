@@ -2,7 +2,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PostDriver.Api.Services;
-using PostDriver.Api.ViewModels.PostOfficeViewModel;
+using PostDriver.Api.ViewModels.PostOfficeViewModels;
+using PostDriver.Api.ViewModels.RegionViewModels;
 
 namespace PostDriver.Api.Controllers
 {
@@ -10,12 +11,15 @@ namespace PostDriver.Api.Controllers
     {
 
         private readonly IPostOfficeService _officeService;
+        private readonly IRegionService _regionService;
         
-        public AdminPanelController(IPostOfficeService officeService)
+        public AdminPanelController(IPostOfficeService officeService, IRegionService regionService)
         {
             _officeService = officeService;
+            _regionService = regionService;
         }
 
+        //Adding PostOffices
         [HttpGet]
         public async Task<IActionResult> AddPostOffice()
         {
@@ -29,6 +33,24 @@ namespace PostDriver.Api.Controllers
                 await _officeService.AddOfficeAsync(model);
             }
             
+            return View();
+        }
+
+        //Adding Regions
+        [HttpGet]
+        public IActionResult AddRegion()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddRegion([FromForm]RegionViewModel model)
+        {
+            if(ModelState.IsValid)
+            {
+                await _regionService.AddRegionAsync(model);
+            }   
+
             return View();
         }
     }

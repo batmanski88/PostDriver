@@ -4,7 +4,7 @@ using PostDriver.Api.ViewModels.AccountViewModels;
 
 namespace PostDriver.Api.Services
 {
-    public interface IUserService : IService
+    public interface IUserService
     {
         Task<UserViewModel> GetUserByEmailAsync(string Email);
         

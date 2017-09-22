@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using PostDriver.Api.ViewModels.PostOfficeViewModel;
+using PostDriver.Api.ViewModels.PostOfficeViewModels;
 using PostDriver.Domain.Domain;
 using PostDriver.Domain.IRepository;
 

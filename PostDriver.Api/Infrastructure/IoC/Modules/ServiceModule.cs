@@ -27,6 +27,10 @@ namespace PostDriver.Api.Infrastructure.IoC.Modules
             builder.RegisterType<JwtHandler>()
                    .As<IJwtHandler>()
                    .SingleInstance();
+            
+            builder.RegisterType<RegionService>()
+                   .As<IRegionService>()
+                   .SingleInstance();
         }
     }
 }

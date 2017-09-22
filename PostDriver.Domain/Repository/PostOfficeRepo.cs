@@ -9,7 +9,7 @@ namespace PostDriver.Domain.Repository
 {
     public class PostOfficeRepo : IPostOfficeRepo
     {
-        private readonly string connectionString;
+        private readonly string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=PostDriver;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         private readonly IConnectionFactory _connection;
 
         public PostOfficeRepo(IConnectionFactory connection)
@@ -20,7 +20,7 @@ namespace PostDriver.Domain.Repository
         public async  Task AddPostOfficeAsync(PostOffice Office)
         {
             var connect = _connection.Connect(connectionString);
-            await connect.ExecuteAsync("INSERT INTO PostOffices (PostOfficeId, Name, Adress, Latitude, Longitude) VALUES(@PostOfficeId, @Name, @Adress, @Latitude, @Longitude)", new {Office.OfficeId, Office.Name, Office.Adress, Office.Latitude, Office.Longitude});
+            await connect.ExecuteAsync("INSERT INTO PostOffices (OfficeId, Name, Adress, Latitude, Longitude) VALUES(@OfficeId, @Name, @Adress, @Latitude, @Longitude)", new {Office.OfficeId, Office.Name, Office.Adress, Office.Latitude, Office.Longitude});
         }
 
         public async Task<PostOffice> GetPostOfficeByIdAsync(Guid OfficeId)

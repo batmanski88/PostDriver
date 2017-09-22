@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using PostDriver.Api.ViewModels.PostOfficeViewModel;
+using PostDriver.Api.ViewModels.PostOfficeViewModels;
 
 namespace PostDriver.Api.Services
 {

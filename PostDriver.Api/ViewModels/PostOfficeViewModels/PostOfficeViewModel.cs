@@ -1,6 +1,6 @@
 using System;
 
-namespace PostDriver.Api.ViewModels.PostOfficeViewModel
+namespace PostDriver.Api.ViewModels.PostOfficeViewModels
 {
     public class PostOfficeViewModel
     {

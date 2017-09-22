@@ -5,7 +5,7 @@ using PostDriver.Api.ViewModels.CompanyViewModels;
 
 namespace PostDriver.Api.Services
 {
-    public interface ICompanyService : IService
+    public interface ICompanyService 
     {
          Task GetCompanyByIdAsync(Guid RegionId);
          Task AddCompanyAsync(CompanyViewModel model);

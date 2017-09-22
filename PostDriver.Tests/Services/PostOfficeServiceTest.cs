@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Moq;
 using PostDriver.Api.Services;
-using PostDriver.Api.ViewModels.PostOfficeViewModel;
+using PostDriver.Api.ViewModels.PostOfficeViewModels;
 using PostDriver.Domain.Domain;
 using PostDriver.Domain.IRepository;
 using Xunit;

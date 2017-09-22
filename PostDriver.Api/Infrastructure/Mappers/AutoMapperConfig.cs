@@ -1,6 +1,7 @@
 using AutoMapper;
 using PostDriver.Api.ViewModels.AccountViewModels;
-using PostDriver.Api.ViewModels.PostOfficeViewModel;
+using PostDriver.Api.ViewModels.PostOfficeViewModels;
+using PostDriver.Api.ViewModels.RegionViewModels;
 using PostDriver.Domain.Domain;
 
 namespace PostDriver.Api.Infrastructure.Mappers
@@ -15,6 +16,7 @@ namespace PostDriver.Api.Infrastructure.Mappers
                 cfg.CreateMap<User, LoginViewModel>();
                 cfg.CreateMap<PostOffice, PostOfficeViewModel>();
                 cfg.CreateMap<PostOffice, AddPostOfficeViewModel>();
+                cfg.CreateMap<Region, RegionViewModel>();
             })
             .CreateMapper();
     }

@@ -9,7 +9,7 @@ namespace PostDriver.Domain.Domain
         public Guid PostOfficeId {get; protected set;}
         public string RegionName {get; protected set;}
 
-        public Region(Guid regionId, string regionName, Guid postOfficeId)
+        public Region(Guid regionId, Guid postOfficeId, string regionName)
         {
             RegionId = regionId;
             SetRegionName(regionName);

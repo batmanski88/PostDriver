@@ -1,0 +1,47 @@
+
+<section id="offices">
+    <div class="row" ng-controller="getOffices"> 
+        <div class="col-md-12 searcher">
+            <label class="col-md-1" style="Color: red;">Wyszukaj:  <span class="glyphicon glyphicon-search"></span></label>
+                <div class="col-md-6 ">
+                <input type="text" class="form-control" ng-model="filterBy.name"/>
+                </div>
+        </div>
+        <div class="col-md-12">
+            <a class="col-md-2 office-link form"  ng-repeat="office in offices | filter:filterBy">
+                <div class="office">
+                   {{ office.name }}
+                   <br>
+                   {{ office.adress }}
+                </div>
+            </a>       
+        </div>
+    </div>
+</section>
+
+@section Scripts
+{
+    <script>
+        var app = angular.module("postDriver", []);
+
+        app.controller('getOffices', ['$scope', '$http', '$log', function($scope, $http, $log)
+        {
+            $scope.offices = [];
+
+            $scope.filterBy = {};
+
+            $http({
+                method: "GET",
+                url: "GetOfficesAsync"
+            }).then(function(response){
+                  var data = response.data;
+
+                  $scope.offices = data;
+                  $log.info("Dane zostały pobrane")
+                });
+
+        }]);
+
+        
+    </script>
+}
