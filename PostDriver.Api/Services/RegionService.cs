@@ -4,26 +4,27 @@ using System.Threading.Tasks;
 using AutoMapper;
 using PostDriver.Api.ViewModels.RegionViewModels;
 using PostDriver.Domain.Domain;
+using PostDriver.Domain.IRepository;
 using PostDriver.Domain.Repository;
 
 namespace PostDriver.Api.Services
 {
     public class RegionService : IRegionService
     {
-        private  readonly PostOfficeRepo _officeRepo;
-        private readonly RegionRepo _regionRepo;
+        private  readonly IPostOfficeService _officeService;
+        private readonly IRegionRepo _regionRepo;
         private readonly IMapper _mapper;
 
-        public RegionService(PostOfficeRepo officeRerpo, RegionRepo regionRepo, IMapper mapper)
+        public RegionService(IPostOfficeService officeService, IRegionRepo regionRepo, IMapper mapper)
         {
-            _officeRepo = officeRerpo;
+            _officeService = officeService;
             _regionRepo = regionRepo;
             _mapper = mapper;
         }
 
         public async Task AddRegionAsync(RegionViewModel model)
         {
-            var office = await _officeRepo.GetPostOfficeByName(model.OfficeName);
+            var office = await _officeService.GetPostOfficeByNameAsync(model.OfficeName);
 
             if(office == null)
             {

@@ -11,6 +11,10 @@ namespace PostDriver.Api.Infrastructure.IoC.Modules
             builder.RegisterType<PostOfficeService>()
                    .As<IPostOfficeService>()
                    .InstancePerLifetimeScope();
+            
+            builder.RegisterType<RegionService>()
+                   .As<IRegionService>()
+                   .InstancePerLifetimeScope();
 
             builder.RegisterType<CompanyService>()
                    .As<ICompanyService>()
@@ -28,9 +32,6 @@ namespace PostDriver.Api.Infrastructure.IoC.Modules
                    .As<IJwtHandler>()
                    .SingleInstance();
             
-            builder.RegisterType<RegionService>()
-                   .As<IRegionService>()
-                   .SingleInstance();
         }
     }
 }

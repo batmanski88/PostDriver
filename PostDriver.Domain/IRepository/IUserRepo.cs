@@ -5,7 +5,7 @@ using PostDriver.Domain.Domain;
 
 namespace PostDriver.Domain.IRepository
 {
-    public interface IUserRepo : IRepository
+    public interface IUserRepo 
     {
         Task<User> GetUserByIdAsync(Guid Id);
         Task<User> GetUserByEmailAsync(string Email);

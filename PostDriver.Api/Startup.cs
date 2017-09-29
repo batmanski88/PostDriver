@@ -20,6 +20,7 @@ using PostDriver.Api.Infrastructure.Settings;
 using PostDriver.Api.Services;
 using PostDriver.Domain.IRepository;
 using PostDriver.Domain.Repository;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace PostDriver.Api
 {
@@ -44,6 +45,19 @@ namespace PostDriver.Api
         {
             services.AddAuthorization(x => x.AddPolicy("user", p => p.RequireRole("user")));
             services.AddMemoryCache();
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                    .AddJwtBearer(options => {
+                        options.TokenValidationParameters = new TokenValidationParameters()
+                        {
+                            ValidateIssuer = true,
+                            ValidateAudience = true,
+                            ValidateLifetime = true,
+                            ValidateIssuerSigningKey = true,
+
+                            ValidIssuer = "http://localhost:7800",
+                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("super_secret_key_123!"))
+                        };
+                    });
             services.AddMvc();
 
             var builder = new ContainerBuilder();
@@ -64,6 +78,7 @@ namespace PostDriver.Api
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseAuthentication();
             app.UseStaticFiles();
 
             app.UseMvc(routes => {
@@ -71,18 +86,6 @@ namespace PostDriver.Api
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}"
                 );
-            });
-
-            var jwtSettings = app.ApplicationServices.GetService<JwtSettings>();
-            app.UseJwtBearerAuthentication(new JwtBearerOptions{
-
-                AutomaticAuthenticate = true,
-                TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidIssuer = jwtSettings.Issuer,
-                    ValidateAudience = false,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key))
-                }
             });
 
             appLifetime.ApplicationStopped.Register(() => ApplicationContainer.Dispose());

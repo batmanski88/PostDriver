@@ -1,0 +1,8 @@
+/home/marcin/PostDriver/PostDriver/PostDriver.Domain/bin/Debug/netstandard2.0/PostDriver.Domain.deps.json
+/home/marcin/PostDriver/PostDriver/PostDriver.Domain/bin/Debug/netstandard2.0/PostDriver.Domain.dll
+/home/marcin/PostDriver/PostDriver/PostDriver.Domain/bin/Debug/netstandard2.0/PostDriver.Domain.pdb
+/home/marcin/PostDriver/PostDriver/PostDriver.Domain/obj/Debug/netstandard2.0/PostDriver.Domain.csproj.CoreCompileInputs.cache
+/home/marcin/PostDriver/PostDriver/PostDriver.Domain/obj/Debug/netstandard2.0/PostDriver.Domain.AssemblyInfoInputs.cache
+/home/marcin/PostDriver/PostDriver/PostDriver.Domain/obj/Debug/netstandard2.0/PostDriver.Domain.AssemblyInfo.cs
+/home/marcin/PostDriver/PostDriver/PostDriver.Domain/obj/Debug/netstandard2.0/PostDriver.Domain.dll
+/home/marcin/PostDriver/PostDriver/PostDriver.Domain/obj/Debug/netstandard2.0/PostDriver.Domain.pdb

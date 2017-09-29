@@ -13,7 +13,7 @@ namespace PostDriver.Api.Controllers
         private readonly IPostOfficeService _officeService;
         private readonly IRegionService _regionService;
         
-        public AdminPanelController(IPostOfficeService officeService, IRegionService regionService)
+        public AdminPanelController(IPostOfficeService officeService, IRegionService regionService )
         {
             _officeService = officeService;
             _regionService = regionService;
@@ -42,7 +42,7 @@ namespace PostDriver.Api.Controllers
         {
             return View();
         }
-
+    
         [HttpPost]
         public async Task<IActionResult> AddRegion([FromForm]RegionViewModel model)
         {
