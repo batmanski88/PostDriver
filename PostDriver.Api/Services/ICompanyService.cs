@@ -8,7 +8,7 @@ namespace PostDriver.Api.Services
     public interface ICompanyService 
     {
          Task GetCompanyByIdAsync(Guid RegionId);
-         Task AddCompanyAsync(CompanyViewModel model);
+         Task AddCompanyAsync(AddCompanyViewModel model);
          Task EditCompanyAsync(CompanyViewModel model);
          Task<IEnumerable<CompanyViewModel>> GetCompaniesAsync(Guid RegionId);
          

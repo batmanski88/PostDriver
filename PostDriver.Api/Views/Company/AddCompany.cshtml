@@ -1,9 +1,81 @@
-@model CompanyViewModel
+@model AddCompanyViewModel
 
-<div ng-app="Company" class="row"> 
-   <form asp-controller="Company" asp-action="AddCompany" method="post" class="form-horizontal" ng-controller="AddCompanyController">
-       <div class="form-group">
-           <label asp-for="@Model.Adress"></label>
-       </div>
-   </form>
-</div>   
+<section>
+    <div class="row" ng-controller="addCompanyController">
+        <form method="post" class="form-horizontal col-md-6" asp-action="AddCompany" asp-controller="CompanyController" ng-submit="submit()">
+            <div class="form-group">
+                <label asp-for="OfficeName" class="col-md-2"></label>
+                <div class="col-md-8">
+                    <input type="text" asp-for="OfficeName" class="form-control"/>
+                    <span asp-validation-for="OfficeName"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="col-md-2"></label>
+                <div class="col-md-8">
+                    <input type="text" asp-for="Name" class="form-control"/>
+                    <span asp-validation-for="Name"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Adress" class="col-md-2"></label>
+                <div class="col-md-8">
+                    <input type="text" asp-for="Adress" class="form-control"/>
+                    <span asp-validation-for="Adress"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Longitude" class="col-md-2"></label>
+                <div class="col-md-8">
+                    <input type="text" asp-for="Longitude" class="form-control"/>
+                    <span asp-validation-for="Longitude"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Latitude" class="col-md-2"></label>
+                <div class="col-md-8">
+                    <input type="text" asp-for="Latitude" class="form-control"/>
+                    <span asp-validation-for="Latitude"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartHour" class="col-md-2"></label>
+                <div class="col-md-8">
+                    <input type="text" asp-for="StartHour" class="form-control"/>
+                    <span asp-validation-for="StartHour"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="FinishHour" class="col-md-2"></label>
+                <div class="col-md-8">
+                    <input type="text" asp-for="FinishHour" class="form-control"/>
+                    <span asp-validation-for="FinishHour"></span>
+                </div>
+            </div>
+            <button type="button" class="btn-primary btn col-md-4" ng-click="geocode()">Znajdź</button>
+            <button type="submit" class="btn-primary btn col-md-4">Dodaj</button>
+        </form>
+        <div class="col-md-6">
+            <div id="map" style="width: 100%; height: 400px;"></div>
+        </div>
+    </div>
+</section>
+
+@section Scripts
+{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        var app = angular.module('postDriver', []);
+
+        app.controller('addCompanyController', ['$scope', function($cope){
+
+            var geocoder = new google.maps.Geocoder();
+
+            var map = new google.maps.Map(document.getElementById('map'),{
+                zoom: 13,
+                center: {lat: 52.32344, lng: 21.0089385}
+            });
+        }]);
+    </script>
+}

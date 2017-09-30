@@ -24,10 +24,10 @@ namespace PostDriver.Domain.Repository
             return await connect.QueryFirstOrDefaultAsync<Region>("SELECT * FROM Regions WHERE RegionId = @Id", new {Id});
         }
 
-        public async Task<IEnumerable<Region>> GetRegionByOfficeIdAsync(Guid OfficeId)
+        public async Task<Region> GetRegionByOfficeIdAsync(Guid OfficeId)
         {
             var connect = _connection.Connect(connectionString);
-            return await connect.QueryAsync<Region>("SELECT * FROM REGIONS WHERE PostOfficeId = @OfficeId", new {OfficeId});
+            return await connect.QueryFirstOrDefaultAsync<Region>("SELECT * FROM REGIONS WHERE PostOfficeId = @OfficeId", new {OfficeId});
         }
 
         public async Task RemoveRegionAsync(Guid Id)

@@ -893,7 +893,7 @@
     "Dapper/1.50.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-6VcCiiOxVhgMwgMCuQuaff8I5IyDamrzeOjuUH1iMExh8R5TJqwkVCpwdVJGQdwSCqWsQA/PerrrK7T6mONthQ==",
+      "sha512": "sha512-31Ju5VGyNNc66OAsw+SCp1TWPBuyw8ZBdkMG5pSUPChZcy27s2GhVz5B9INP4f25mPqfiJ+mfeHy9JAJyyT+LQ==",
       "path": "dapper/1.50.2",
       "hashPath": "dapper.1.50.2.nupkg.sha512"
     },
@@ -998,7 +998,7 @@
     "System.Data.Common/4.1.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-epU8jeTe7aE7RqGHq9rZ8b0Q4Ah7DgubzHQblgZMSqgW1saW868WmooSyC5ywf8upLBkcVLDu93W9GPWUYsU2Q==",
+      "sha512": "sha512-m9qnIIc8bMhj50Udr7gnU508MyqF4tMK+PzusDYz+Xdx5kQ81l2bD/4pf8D0I+PAHqctEKZzZeaLDWZNI9uo5A==",
       "path": "system.data.common/4.1.0",
       "hashPath": "system.data.common.4.1.0.nupkg.sha512"
     },
