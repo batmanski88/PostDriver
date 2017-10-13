@@ -76,22 +76,20 @@
                 });
             };
             
-            addOfficeFactory('office', function(data)
-            {
-                $scope.addOffice = data;
-            });
+            $scope.addOffice = addOfficeFactory($scope.office);
             
             }]);
 
-           app.factory('addOfficeFactory', ['$http', function($http){
+           app.factory('addOfficeFactory', ['$http', '$log', function($http, $log){
 
-               var url = 'AddPostOffice';
-
-               return function(type, callback)
-               {
-                   callback = callback || function(){};
-                   
-                   $http({method: 'post', url: url});
+               return function(data){
+                   $http({
+                       method: 'post',
+                       url: 'AddPostOffice',
+                       data: data
+                   }).then(function(success){
+                       $log.info("Dane zostały zapisane!");
+                   });
                };
            }]);
         

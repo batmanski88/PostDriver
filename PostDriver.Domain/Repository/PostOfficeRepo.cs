@@ -9,7 +9,7 @@ namespace PostDriver.Domain.Repository
 {
     public class PostOfficeRepo : IPostOfficeRepo
     {
-        private readonly string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=PostDriver;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        private readonly string connectionString = "Server=localhost; User Id=SA; Password=Batmanek88; Database=PostDriverDb";
         private readonly IConnectionFactory _connection;
 
         public PostOfficeRepo(IConnectionFactory connection)

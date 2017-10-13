@@ -42,5 +42,10 @@ namespace PostDriver.Api.Services
 
             return _mapper.Map<IEnumerable<RegionViewModel>>(regions);
         }
+
+        public async Task RemoveRegionAsync(Guid RegionId)
+        {
+            await _regionRepo.RemoveRegionAsync(RegionId);
+        }
     }
 }

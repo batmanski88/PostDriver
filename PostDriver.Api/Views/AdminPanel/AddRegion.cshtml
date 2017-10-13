@@ -6,14 +6,14 @@
             <div class="form-group">
                 <label asp-for="OfficeName" class="col-md-2"></label>
                 <div class="col-md-8">
-                    <input type="text" asp-for="OfficeName" class="form-control"/>
+                    <input type="text" asp-for="OfficeName" class="form-control" ng-model="region.OfficeName"/>
                     <span asp-validation-for="OfficeName"></span>
                 </div>
             </div>
             <div class="form-group">
                 <label asp-for="Name" class="col-md-2"></label>
                 <div class="col-md-8">
-                    <input type="text" asp-for="Name" class="form-control"/>
+                    <input type="text" asp-for="Name" class="form-control" ng-model="region.Name"/>
                     <span asp-validation-for="Name"></span>
                 </div>
             </div>
@@ -29,8 +29,14 @@
     <script>
         var app = angular.module("postDriver", []);
 
-        app.controller('addRegionController', [ '$scope', function($scope){
+        app.controller('addRegionController', [ '$scope', '$http', '$log', function($scope, $http, $log){
 
+            $scope.region = {};
+
+            $scope.submit = $http({method: 'post', url: 'AddRegion', data: $scope.region})
+                 .then(function(success){
+                     $log.info('Pomyślnie dodano rejon do urzędu!');
+                 });
         }]);
     </script>
 }

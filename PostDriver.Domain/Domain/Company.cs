@@ -8,23 +8,23 @@ namespace PostDriver.Domain.Domain
        public Guid RegionId {get; protected set; }
        public string Name {get; protected set; }
        public string Adress {get; protected set; }
-       public double Longtitude {get; protected set; }
+       public double Longitude {get; protected set; }
        public double Latitude {get; protected set; }
        public DateTime StartHour {get; protected set; }
        public DateTime FinishHour {get; protected set; }
 
-       public Company()
+       protected Company()
        {
 
        }
 
-       public Company(Guid regionId, Guid companyId, string name,string adress, double longtitude, double latitude, DateTime starHour, DateTime finishHour)
+       public Company(Guid regionId, Guid companyId, string name,string adress, double longitude, double latitude, DateTime starHour, DateTime finishHour)
        {
             CompanyId = companyId;
             SetRegionId(regionId);
             SetName(name);
             SetAdress(adress);
-            SetLongtitude(longtitude);
+            SetLongtitude(longitude);
             SetLatitude(latitude);
             SetStartHour(starHour);
             SetFinishHour(finishHour);
@@ -54,13 +54,13 @@ namespace PostDriver.Domain.Domain
            Adress = adress;
        }
 
-       public void  SetLongtitude(double longtitude)
+       public void  SetLongtitude(double longitude)
        {
-           if(Longtitude == longtitude)
+           if(Longitude == longitude)
            {
                return;
            }
-           Longtitude = longtitude;
+           Longitude = longitude;
        }
 
        public void SetLatitude(double latitude)

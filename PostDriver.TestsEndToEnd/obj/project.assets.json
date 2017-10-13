@@ -1638,7 +1638,7 @@
       ]
     },
     "Microsoft.Extensions.DependencyModel/1.0.0": {
-      "sha512": "AeATK5ulvIIqFsC7S5jfGUYUG1lOhD54Lbz7giXrbg94Imt4MW9hKJyLBYk238mWLm0OSjrJ4zgvkNHvFZdIaA==",
+      "sha512": "n55Y2T4qMgCNMrJaqAN+nlG2EH4XL+e9uxIg4vdFsQeF+L8UKxRdD3C35Bt+xk3vO3Zwp3g+6KFq2VPH2COSmg==",
       "type": "package",
       "path": "microsoft.extensions.dependencymodel/1.0.0",
       "files": [
@@ -5571,30 +5571,28 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\marcin.lapinski\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "/home/marcin/.nuget/packages/": {},
+    "/usr/share/dotnet/sdk/NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\marcin.lapinski\\Documents\\Projects\\PostDriver\\PostDriver.TestsEndToEnd\\PostDriver.TestsEndToEnd.csproj",
+      "projectUniqueName": "/home/marcin/PostDriver/PostDriver/PostDriver.TestsEndToEnd/PostDriver.TestsEndToEnd.csproj",
       "projectName": "PostDriver.TestsEndToEnd",
-      "projectPath": "c:\\Users\\marcin.lapinski\\Documents\\Projects\\PostDriver\\PostDriver.TestsEndToEnd\\PostDriver.TestsEndToEnd.csproj",
-      "packagesPath": "C:\\Users\\marcin.lapinski\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\marcin.lapinski\\Documents\\Projects\\PostDriver\\PostDriver.TestsEndToEnd\\obj\\",
+      "projectPath": "/home/marcin/PostDriver/PostDriver/PostDriver.TestsEndToEnd/PostDriver.TestsEndToEnd.csproj",
+      "packagesPath": "/home/marcin/.nuget/packages/",
+      "outputPath": "/home/marcin/PostDriver/PostDriver/PostDriver.TestsEndToEnd/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "/usr/share/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\marcin.lapinski\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/home/marcin/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

@@ -9,13 +9,17 @@ namespace PostDriver.Domain.Repository
 {
     public class RegionRepo : IRegionRepo
     {
-        private readonly string connectionString;
-        private readonly ConnectionFactory _connection;
+        private readonly string connectionString = "Server=localhost; User Id=SA; Password=Batmanek88; Database=PostDriverDb";
+        private readonly IConnectionFactory _connection;
 
+        public RegionRepo(IConnectionFactory connection)
+        {
+            _connection = connection;
+        }
         public async Task AddRegionAsync(Region Region)
         {
             var connect = _connection.Connect(connectionString);
-            await connect.ExecuteAsync("INSERT INTO Regions (RegionId, PostOfficeId, Name) VALUES (@RegionId, @PostOfficeId, @Name) FROM Regions r INNER JOIN PostOffices p ON r.PostOfficeId = p.OfficeId", new {Region.RegionId, Region.PostOfficeId, Region.RegionName});
+            await connect.ExecuteAsync("INSERT INTO Regions (RegionId, PostOfficeId, RegionName) VALUES (@RegionId, @PostOfficeId, @RegionName)", new {Region.RegionId, Region.PostOfficeId, Region.RegionName});
         }
 
         public async Task<Region> GetRegionByIdAsync(Guid Id)
@@ -33,7 +37,7 @@ namespace PostDriver.Domain.Repository
         public async Task RemoveRegionAsync(Guid Id)
         {
             var connect = _connection.Connect(connectionString);
-            await connect.ExecuteAsync("DELETE r FROM Regions r INNER JOIN PostOffices p ON c.PostOfficeId = p.OfficeId WHERE Regionid = @Id", new {Id});
+            await connect.ExecuteAsync("DELETE r FROM Regions r WHERE Regionid = @Id", new {Id});
         }
 
         public async Task UpdateRegionAsync(Region Region)

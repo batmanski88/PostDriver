@@ -9,5 +9,6 @@ namespace PostDriver.Api.Services
     {
          Task AddRegionAsync(RegionViewModel model);
          Task<IEnumerable<RegionViewModel>> GetRegionsByOfficeIdAsync(Guid OfficeId);
+         Task RemoveRegionAsync(Guid RegionId);
     }
 }

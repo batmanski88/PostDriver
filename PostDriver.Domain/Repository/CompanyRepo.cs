@@ -9,7 +9,7 @@ namespace PostDriver.Domain.Repository
 {
     public class CompanyRepo : ICompanyRepo
     {
-        private readonly string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=PostDriver;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        private readonly string connectionString = "Server=localhost; User Id=SA; Password=Batmanek88; Database=PostDriverDb";
         private readonly IConnectionFactory _connection;
 
         public CompanyRepo(IConnectionFactory connection)
@@ -20,7 +20,7 @@ namespace PostDriver.Domain.Repository
         public async Task AddCompanyAsync(Company Company)
         {
             var connect = _connection.Connect(connectionString);
-            await connect.ExecuteAsync("INSERT INTO Companies (CompanyId, RegionId, Name, Adress, Longtitude, Latitude, StartHour, FinishHour) VALUES (@CompanyId, @RegionId, @Name, @Adress, @Longtitude, @Latitude, @StartHour@, @FinishHour) FROM Companies c INNER JOIN Regions r ON c.RegionId = r.REgionId", new {Company.CompanyId, Company.RegionId, Company.Name, Company.Adress, Company.Longtitude, Company.Latitude, Company.StartHour, Company.FinishHour});
+            await connect.ExecuteAsync("INSERT INTO Companies (CompanyId, RegionId, Name, Adress, Longitude, Latitude, StartHour, FinishHour) VALUES (@CompanyId, @RegionId, @Name, @Adress, @Longtitude, @Latitude, @StartHour@, @FinishHour) FROM Companies c INNER JOIN Regions r ON c.RegionId = r.REgionId", new {Company.CompanyId, Company.RegionId, Company.Name, Company.Adress, Company.Longitude, Company.Latitude, Company.StartHour, Company.FinishHour});
         }
 
         public async Task<IEnumerable<Company>> GetCompaniesAsync()
@@ -55,7 +55,7 @@ namespace PostDriver.Domain.Repository
         public async Task UpdateCompanyAsync(Company Company)
         {
             var connect = _connection.Connect(connectionString);
-            await connect.ExecuteAsync("UPDATE Companies c SET c.Name = @Name,c.Adress = @Adress, c.Longtitude = @Longtitude, c.Latitude = @Latitude, c.StartHour = @StartHour, c.FinishHour = @FinishHour", new {Company.Name, Company.Adress, Company.Longtitude, Company.Latitude, Company.StartHour, Company.FinishHour});
+            await connect.ExecuteAsync("UPDATE Companies c SET c.Name = @Name,c.Adress = @Adress, c.Longitude = @Longitude, c.Latitude = @Latitude, c.StartHour = @StartHour, c.FinishHour = @FinishHour", new {Company.Name, Company.Adress, Company.Longitude, Company.Latitude, Company.StartHour, Company.FinishHour});
         }
     }
 }

@@ -4,6 +4,7 @@ namespace PostDriver.Api.ViewModels.CompanyViewModels
 {
     public class AddCompanyViewModel
     {
+       public Guid RegionId {get; set;}
        public string OfficeName {get; set;}
        public string Name {get; set; }
        public string Adress {get; set; }
