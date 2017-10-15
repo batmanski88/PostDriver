@@ -11,6 +11,7 @@ namespace PostDriver.Api.Services
          Task AddCompanyAsync(AddCompanyViewModel model);
          Task EditCompanyAsync(CompanyViewModel model);
          Task<IEnumerable<CompanyViewModel>> GetCompaniesAsync(Guid RegionId);
+         Task ChangeViewModel(AddCompanyViewModel model);
          
     }
 }

@@ -6,6 +6,8 @@ using PostDriver.Domain.Domain;
 using PostDriver.Domain.Repository;
 using AutoMapper;
 using PostDriver.Domain.IRepository;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Linq;
 
 namespace PostDriver.Api.Services
 {
@@ -31,11 +33,26 @@ namespace PostDriver.Api.Services
             }
             
             var office = await _officeRepo.GetPostOfficeByName(model.Name);
-            var region = await _regionRepo.GetRegionByOfficeIdAsync(office.OfficeId);
-            
+            var regions = await _regionRepo.GetRegionsAsync();
+            var region = regions.SingleOrDefault(x => x.PostOfficeId == office.OfficeId);
+
             company = new Company(region.RegionId, Guid.NewGuid(), model.Name, model.Adress, model.Longitude, model.Latitude, model.StartHour, model.FinishHour);
 
             await _companyRepo.AddCompanyAsync(company);
+        }
+
+        public async Task ChangeViewModel(AddCompanyViewModel model)
+        {
+            var offices = await _officeRepo.GetPostOfficesAsync();
+            model.Offices = new SelectList(offices, "OfficeId", "Name");
+            var regions = await _regionRepo.GetRegionsAsync();
+
+            if(model.OfficeId.HasValue)
+            {
+                var regionsByOfficeId = regions.Where(x => x.PostOfficeId == model.OfficeId.Value);
+                model.Regions = new SelectList(regionsByOfficeId, "RegionId", "RegionName");
+            }
+            
         }
 
         public Task EditCompanyAsync(CompanyViewModel model)
